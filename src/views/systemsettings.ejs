@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CryptoTicker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="csrf-token" content="<%= csrfToken ;%>">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="grey lighten-5">
+<nav>
+    <div class="nav-wrapper">
+        <ul id="nav-mobile" class="right">
+            <li>
+                <a href="tickersettings">Ticker Settings</a>
+            </li>
+            <li class="active">
+                <a href="systemsettings">System Settings</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m8 xl6 offset-m2 offset-xl3">
+            <h3>System Settings</h3>
+        </div>
+        <div class="col s12 m8 xl6 offset-m2 offset-xl3">
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">lock</i>
+                        Ticker Ui Password
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="row darken-3">
+                            <div class="input-field col s12 m12">
+                                <input id="oldpassword" name="password" type="password">
+                                <label for="oldpassword">Old Password</label>
+                            </div>
+                            <div class="input-field col s12 m12">
+                                <input id="uipassword" name="newpassword" type="password">
+                                <label for="uipassword">New Password</label>
+                            </div>
+                            <div class="input-field col s12 m12">
+                                <input id="repeatuipassword" type="password">
+                                <label for="repeatuipassword">Repeat New Password</label>
+                            </div>
+                            <a id="setpassword"
+                               class="col s6 m4 offset-s3 offset-m4 waves-effect waves-light btn">Set password</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">dashboard</i>
+                        Ticker Ui
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="row">
+                            <a id="update-ui"
+                               class="col s6 m4 offset-s3 offset-m4 waves-effect waves-light btn">Update</a>
+                        </div>
+                        <div class="row">
+                            <a id="restart-ui" class="col s6 m4 offset-s3 offset-m4 waves-effect waves-light btn">Restart</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">trending_up</i>
+                        BTC Ticker
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="row">
+                            <a id="update-ticker" class="col s6 m4 offset-s3 offset-m4 waves-effect waves-light btn ">Update</a>
+                        </div>
+                        <div class="row">
+                            <a id="restart-ticker" class="col s6 m4 offset-s3 offset-m4 waves-effect waves-light btn ">Restart</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">wifi_protected_setup</i>
+                        Wifi
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="row">
+                            <p class="col s12">Add a new WiFi password.<br>
+                                <b>Be aware:</b> Special characters might need to be escaped.
+                            <br>
+                                <b>Recommended:</b> Use <code>psk</code> from <code>wpa_passphrase</code> output as password
+                            <br>
+                                Changes take effect after a restart
+                            </p>
+                            <div class="input-field col s12 m6">
+                                <input id="ssid" name="ssid" type="text">
+                                <label for="ssid">SSID</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <input id="wifipassword" name="password" type="password">
+                                <label for="wifipassword">Password</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <input id="priority" name="priority" type="number" value="0">
+                                <label for="priority">Priority</label>
+                            </div>
+                            <a id="add-wifi-network" class="col s6 m4 offset-s3 offset-m4 waves-effect waves-light btn ">Add</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">important_devices</i>
+                        System
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="row">
+                            <div class="row">
+                                <a id="restart-system" class="col s6 m4 offset-s3 offset-m4 waves-effect waves-light btn ">Restart</a>
+                            </div>
+                            <div class="row">
+                                <a id="shutdown-system" class="col s6 m4 offset-s3 offset-m4 waves-effect waves-light btn ">Shutdown</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script type="module" src="/systemsettings.js"></script>
+</body>
+</html>

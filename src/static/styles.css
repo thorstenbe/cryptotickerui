@@ -1,0 +1,27 @@
+body {
+    min-height: 100vh;
+}
+
+.checkbox__margin {
+    margin-bottom: 1rem;
+}
+
+.row .checkbox__margin:last-child {
+    margin-bottom: 0rem;
+}
+
+.crypto--card {
+    cursor: move;
+}
+
+.crypto-card__title {
+    flex-grow: 1;
+}
+
+.crypto-card__delete-button {
+    cursor: pointer;
+}
+
+.crypto-card__drag-indicator {
+    margin-right: 1rem;
+}

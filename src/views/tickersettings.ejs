@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CryptoTicker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="csrf-token" content="<%= csrfToken ;%>">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <meta id="autofill-coins" name="autofill-coins" content="<%= JSON.stringify(coins) ;%>">
+</head>
+<body class="grey lighten-5">
+<nav>
+    <div class="nav-wrapper">
+        <ul id="nav-mobile" class="right">
+            <li class="active"><a href="tickersettings">Ticker Settings</a></li>
+            <li><a href="systemsettings">System Settings</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m8 xl6 offset-m2 offset-xl3">
+            <h3>Ticker Settings</h3>
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <div class="row">
+                            <h5 class="col s12">Cryptos</h5>
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">search</i>
+                                <input type="text" id="autocomplete-input" class="autocomplete crypto-search">
+                                <label for="autocomplete-input">Search</label>
+                            </div>
+                            <div class="col s12">
+                                <ul id="crypto-list">
+                                    <%- selectedCoins; %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m8 xl6 offset-m2 offset-xl3">
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <div class="row js--display-options">
+                            <h5 class="col s12">Display</h5>
+                            <div class="input-field col s12">
+                                <select name="orientation" class="js--select">
+                                    <option value="90" <%= config.display.orientation === 90 ? 'selected' : '' ;%> >90°
+                                    </option>
+                                    <option value="0" <%= config.display.orientation === 0 ? 'selected' : '' ;%>>0°
+                                    </option>
+                                    <option value="180" <%= config.display.orientation === 180 ? 'selected' : '' ;%>>180°
+                                    </option>
+                                    <option value="270" <%= config.display.orientation === 270 ? 'selected' : '' ;%>>270°
+                                    </option>
+                                </select>
+                                <label>Screen Orientation</label>
+                            </div>
+                            <label class="col s12 checkbox__margin">
+                                <input type="checkbox" class="filled-in js--checkbox"
+                                       name="cycle" <%= config.display.cycle === true ? 'checked' : '' ;%>/>
+                                <span>Cycle Through Cryptos</span>
+                            </label>
+                            <label class="col s12 checkbox__margin">
+                                <input type="checkbox" class="filled-in js--checkbox"
+                                       name="inverted" <%= config.display.inverted === true ? 'checked' : '' ;%>/>
+                                <span>Inverted Colors</span>
+                            </label>
+                            <label class="col s12 checkbox__margin">
+                                <input type="checkbox" class="filled-in js--checkbox"
+                                       name="trendingmode" <%= config.display.trendingmode === true ? 'checked' : '' ;%>/>
+                                <span>Trending Cryptos</span>
+                            </label>
+                            <label class="col s12 checkbox__margin">
+                                <input type="checkbox" class="filled-in js--checkbox"
+                                       name="showvolume" <%= config.display.showvolume === true ? 'checked' : '' ;%>/>
+                                <span>Crypto Volume</span>
+                            </label>
+                            <label class="col s12 checkbox__margin">
+                                <input type="checkbox" class="filled-in js--checkbox"
+                                       name="showrank" <%= config.display.showrank === true ? 'checked' : '' ;%>/>
+                                <span>Crypto Rank</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m8 xl6 offset-m2 offset-xl3">
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <div class="row js--ticker-options">
+                            <h5 class="col s12">Ticker</h5>
+                            <div class="input-field col s12">
+                                <input id="exchange"  class="js--text" name="exchange" value="<%= config.ticker.exchange ;%>" type="text">
+                                <label for="exchange">Exchange</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="currency"  class="js--text" name="fiatcurrency" value="<%= config.ticker.fiatcurrency ;%>" type="text">
+                                <label for="currency">FIAT Currency</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="sparkline"  class="js--text" name="sparklinedays" type="number" value="<%= config.ticker.sparklinedays ;%>"
+                                       type="text">
+                                <label for="sparkline">Sparkline Days</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="frequency"  class="js--text" name="updatefrequency" type="number" value="<%= config.ticker.updatefrequency ;%>"
+                                       type="text">
+                                <label for="frequency">Update Frequency</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fixed-action-btn">
+            <a id="menu" class="waves-effect waves-light btn-floating btn-large red">
+                <i class="large material-icons">done</i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<script type="module" src="/tickersettings.js"></script>
+</body>
+</html>
