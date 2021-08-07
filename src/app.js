@@ -52,6 +52,9 @@ router.post('/systemsettings/restartticker', systemSettingsHandler.restartTicker
 router.use('/systemsettings/addwifipassword', csrfProtection, security.verifyToken);
 router.post('/systemsettings/addwifipassword', systemSettingsHandler.addWifi);
 
+router.use('/systemsettings/setpassword', csrfProtection, security.verifyToken);
+router.post('/systemsettings/setpassword', systemSettingsHandler.setPassword);
+
 router.use('/systemsettings/restartsystem', csrfProtection, security.verifyToken);
 router.post('/systemsettings/restartsystem', systemSettingsHandler.restartSystem);
 
