@@ -9,8 +9,8 @@ const load = () => {
         const configYaml = yaml.load(configFile);
         getLogger().debug('Loaded config %o', configYaml);
         return configYaml;
-    } catch (e) {
-        getLogger().error('Error while reading config file', e);
+    } catch (error) {
+        getLogger().error(error, 'Error while reading config file');
     }
 };
 
@@ -35,8 +35,8 @@ const save = (newConfig) => {
     getLogger().debug('Writing new config %o', mergedConfig);
     try {
         fs.writeFileSync(getConfigFilePath(), yaml.dump(mergedConfig));
-    } catch (e) {
-        getLogger().error('Error while writing config file', e);
+    } catch (error) {
+        getLogger().error(error, 'Error while writing config file');
     }
 };
 

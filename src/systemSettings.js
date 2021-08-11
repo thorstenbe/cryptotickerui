@@ -24,8 +24,8 @@ exports.updateTickerUi = async (req, res) => {
         }
 
         return handleTickerUiRestart(res);
-    } catch (e) {
-        getLogger().error('Error while updating Ticker ui', e);
+    } catch (error) {
+        getLogger().error(error, 'Error while updating Ticker ui');
         res.sendStatus(500);
     }
 };
@@ -63,8 +63,8 @@ exports.updateTicker = async (req, res) => {
             await execShell(updateTickerCommand);
         }
         return handleTickerRestart(res);
-    } catch (e) {
-        getLogger().error('Error while updating ticker', e);
+    } catch (error) {
+        getLogger().error(error, 'Error while updating ticker');
         return res.sendStatus(500);
     }
 };
@@ -124,8 +124,8 @@ exports.restartSystem = async (req, res) => {
         getLogger().info('Restarting system');
         await execShell(process.env.RESTART_SYSTEM_COMMAND);
         return res.sendStatus(200);
-    } catch (e) {
-        getLogger().error('Error while restarting system', e);
+    } catch (error) {
+        getLogger().error(error, 'Error while restarting system');
         return res.sendStatus(500);
     }
 };
@@ -135,8 +135,8 @@ exports.shutdownSystem = async (req, res) => {
         getLogger().info('Shutting down system');
         await execShell(process.env.SHUTDOWN_SYSTEM_COMMAND);
         return res.sendStatus(200);
-    } catch (e) {
-        getLogger().error('Error while shutting down system', e);
+    } catch (error) {
+        getLogger().error(error, 'Error while shutting down system');
         return res.sendStatus(500);
     }
 };
@@ -145,7 +145,7 @@ const execShell = (shellCommand) => {
     return new Promise((resolve, reject) => {
         exec(shellCommand, (error) => {
             if (error) {
-                getLogger().error('Error while executing shell command', e);
+                getLogger().error(error, 'Error while executing shell command');
                 reject();
                 return;
             }

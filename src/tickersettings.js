@@ -15,8 +15,8 @@ exports.displaySettings = async (req, res) => {
         viewModel.coins = await getCoins();
         viewModel.selectedCoins = prepareDisplayedCoins(config);
         return res.render('tickersettings', viewModel);
-    } catch (e) {
-        getLogger().error('Error while rendering ticker view', e);
+    } catch (error) {
+        getLogger().error(error, 'Error while rendering ticker view');
     }
     return res.redirect('/');
 };
@@ -50,9 +50,9 @@ const getCoins = () => {
         const coinList = coingeckoCache.get(coinListCacheKey);
 
         if (coinList === undefined) {
-            request('https://api.coingecko.com/api/v3/coins/list', {json: true}, (err, res, body) => {
-                if (err) {
-                    getLogger().error('Could not fetch coin list from CoinGecko', e);
+            request('https://api.coingecko.com/api/v3/coins/list', {json: true}, (error, res, body) => {
+                if (error) {
+                    getLogger().error(error, 'Could not fetch coin list from CoinGecko');
                     reject();
                 }
                 const preparedCoins = prepareCoins(body);

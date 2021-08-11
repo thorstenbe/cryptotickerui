@@ -61,9 +61,9 @@ exports.verifyToken = (req, res, next) => {
         return handleInvalidToken(req, res);
     }
 
-    jwt.verify(token, process.env.TOKEN_SECRET + retrievePassword(), (err, decodedToken) => {
-        if (err) {
-            getLogger().error('Error while decoding secret', e);
+    jwt.verify(token, process.env.TOKEN_SECRET + retrievePassword(), (error) => {
+        if (error) {
+            getLogger().error(error, 'Error while decoding secret');
             return handleInvalidToken(req, res);
         }
         next();

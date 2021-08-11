@@ -16,7 +16,7 @@ const restartTicker = () => {
     if (afterConfigCommand) {
         exec(afterConfigCommand, (error) => {
             if (error) {
-                getLogger().error('Error while restarting Ticker ui', error);
+                getLogger().error(error, 'Error while restarting Ticker ui');
             }
         });
     }
